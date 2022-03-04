@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<HTML lang="en">
+        <head>
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width\,initial-scale=1.0"
+        <meta http-equiv="X-UA-Compatible" content=ie="edge" />
+      <title>ISS TRACKER</title>
+      </head>
+      <body>
+        <body class="vh-100">
+                  
+        <div class="mx-auto col-5" style="left-top: 10rem;">
+        <h1 class="text-top mb-3 text-secondary">Choose Datetime</h1>
+        
+         <form>
+           <input class="form-control" type=datetime-local" placeholder="Select DateTime">
+           <button type="submit">Submit</button>
+         </form>
+          
+        
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>   
+
+        <script>
+            const utcDate1 = new Date(Date.UTC(96, 1, 2, 3, 4, 5));
+            const utcDate2 = new Date(Date.UTC(0, 0, 0, 0, 0, 0));
+
+            console.log(utcDate1.toUTCString());
+            console.log(utcDate2.toUTCString());
+            config = {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                altInput: true,
+                altFormat: "F j, Y (h:S K)"
+            };
+            flatpickr("input[type=datetime-local]", config);
+
+        </script>
+        
+        
+        <h1> ISS Location </h1><!-- comment -->
+          
+          <p>latitude: <span id="lat"></span><br  />
+             longitude: <span id="lon"></span> 
+          </p>
+          
+          <script> 
+             const api_url1 = 'https://api.wheretheiss.at/v1/satellites/25544';
+          
+                    async function getISS() {
+                    const response = await fetch(api_url1);
+                    const data = await response.json();
+                    const { latitude, longitude } = data;
+                    var norad_n2yo = '43600';
+                    var allpasses_n2yo = '1';
+                    var map_n2yo = '1'; 
+             
+             document.getElementById('lat').textContent = latitude;
+             document.getElementById('lon').textContent = longitude;              
+        }
+        getISS();
+      
+        </script> 
+	<script type="text/javascript" src="https://www.n2yo.com/js/widget-tracker.js"></script>
+    </body>
+</html>
+
